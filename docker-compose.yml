@@ -6,8 +6,6 @@ services:
     container_name: server_herbal_dev
     volumes:
       - .:/app
-    ports:
-      - "1201:1201"
     environment:
       - FLASK_APP=run.py
       - FLASK_ENV=development
