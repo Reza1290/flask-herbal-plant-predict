@@ -20,4 +20,4 @@ services:
       - UPLOAD_FOLDER=${UPLOAD_FOLDER:-/app/app/static/uploads}
       - JWT_SECRET_KEY=${JWT_SECRET_KEY:-your-super-secret-key}
     command: flask run --reload
-    network-mode: host
+    network_mode: host
