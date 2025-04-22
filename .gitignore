@@ -26,3 +26,5 @@ Include
 Lib
 
 app/static/uploads/*
+
+.env

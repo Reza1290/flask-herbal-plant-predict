@@ -5,7 +5,7 @@ services:
     build: .
     container_name: server_herbal_dev
     volumes:
-      - .:/app  
+      - .:/app
     ports:
       - "1201:1201"
     environment:
@@ -14,24 +14,12 @@ services:
       - FLASK_RUN_HOST=0.0.0.0
       - MYSQL_HOST=mysql
       - MYSQL_USER=${MYSQL_USER:-root}
-      - MYSQL_PASSWORD=${MYSQL_PASSWORD:-example}
-      - MYSQL_DATABASE=${MYSQL_DATABASE:-herbal_db}
+      - MYSQL_PASSWORD=${MYSQL_PASSWORD}
+      - MYSQL_DATABASE=${MYSQL_DATABASE:-herbal}
+      - BASE_URL=${BASE_URL:-http://localhost:1201}
+      - UPLOAD_FOLDER=${UPLOAD_FOLDER:-/app/app/static/uploads}
+      - JWT_SECRET_KEY=${JWT_SECRET_KEY:-your-super-secret-key}
     command: flask run --reload
-    depends_on:
-      - mysql
-
-  mysql:
-    image: mysql:8.0
-    container_name: mysql_dev
-    ports:
-      - "3306:3306"
-    environment:
-      MYSQL_ROOT_PASSWORD: ""
-      MYSQL_USER: ${MYSQL_USER:-root}
-      MYSQL_PASSWORD: ${MYSQL_PASSWORD}
-      MYSQL_DATABASE: ${MYSQL_DATABASE:-herbal}
-    volumes:
-      - db_data:/var/lib/mysql
 
 volumes:
   db_data:
