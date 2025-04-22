@@ -6,7 +6,7 @@ services:
     volumes:
       - .:/app  # Sync host project dir into container
     ports:
-      - "5000:5000"
+      - "1201:1201"
     environment:
       - FLASK_APP=run.py
       - FLASK_ENV=development
