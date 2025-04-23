@@ -3,6 +3,7 @@ from werkzeug.security import generate_password_hash, check_password_hash
 from flask_jwt_extended import create_access_token
 from app.models import db
 from app.models.User import User
+from datetime import timedelta
 
 class AuthController:
 
@@ -24,6 +25,6 @@ class AuthController:
         user = User.query.filter_by(username=data['username']).first()
         if not user or not check_password_hash(user.password_hash, data['password']):
             return jsonify({'msg': 'Invalid credentials'}), 401
-
-        access_token = create_access_token(identity=str(user.id))
+        expires_delta = timedelta(days=1)
+        access_token = create_access_token(identity=str(user.id), expires_delta=expires_delta)
         return jsonify({'access_token': access_token})
