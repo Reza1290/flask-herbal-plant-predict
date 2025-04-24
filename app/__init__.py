@@ -10,8 +10,9 @@ def create_app():
     app = Flask(__name__)
     CORS(app)
 
+    enviroment = os.environ.get('FLASK_ENV')
     app.config['BASE_URL'] = os.environ.get('BASE_URL', 'http://localhost:5000')
-    app.config['UPLOAD_FOLDER'] = os.environ.get('UPLOAD_FOLDER', 'app/static/uploads')
+    app.config['UPLOAD_FOLDER'] = os.environ.get('UPLOAD_FOLDER', 'app/static/uploads') if enviroment == "production" else "app/static/uploads"
     app.config['MAX_CONTENT_LENGTH'] = 16 * 1024 * 1024
     app.config['SQLALCHEMY_DATABASE_URI'] = f"mysql+pymysql://{os.environ.get('MYSQL_USER', 'root')}:{os.environ.get('MYSQL_PASSWORD', '')}@{os.environ.get('MYSQL_HOST', '127.0.0.1')}/{os.environ.get('MYSQL_DATABASE', 'herbal')}"
     app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
