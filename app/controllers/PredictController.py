@@ -20,7 +20,7 @@ class PredictController:
         benefit = get_khasiat(label)
 
         pred = Prediction(
-            plant_name=label,
+            plant_name=label + " Herbal",
             benefit=benefit,
             confidence=confidence,
             image_path=filename,
@@ -30,7 +30,7 @@ class PredictController:
         db.session.commit()
 
         return jsonify({
-            'plant_name': label,
+            'plant_name': label + " Herbal",
             'benefit': benefit,
             'confidence': confidence
         })
